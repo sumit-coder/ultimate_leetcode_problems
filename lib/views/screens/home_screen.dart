@@ -20,109 +20,150 @@ class _HomeScreenState extends State<HomeScreen> {
     {'title': 'Cracking The Coding Interview Book 5th 189', 'code': 'CTCI189', 'url': ''},
   ];
 
+  List<Map> listOfProblemsTopicWise = [
+    {
+      'topicTitle': 'Queue',
+      'problems': [
+        "https://leetcode.com/problems/number-of-recent-calls/",
+        "https://leetcode.com/problems/dota2-senate/",
+      ],
+    },
+    {
+      'topicTitle': 'Intervals',
+      'problems': [
+        "https://leetcode.com/problems/summary-ranges/",
+        "https://leetcode.com/problems/merge-intervals/",
+        "https://leetcode.com/problems/insert-interval/",
+        "https://leetcode.com/problems/minimum-number-of-arrows-to-burst-balloons/",
+        "https://leetcode.com/problems/non-overlapping-intervals/",
+        "https://leetcode.com/problems/meeting-rooms/",
+        "https://leetcode.com/problems/meeting-rooms-ii/",
+        "https://leetcode.com/problems/minimum-interval-to-include-each-query/"
+      ],
+    },
+    {
+      'topicTitle': 'Prefix Sum',
+      'problems': [
+        "https://leetcode.com/problems/find-the-highest-altitude/",
+        "https://leetcode.com/problems/find-pivot-index/",
+      ],
+    },
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey.shade900,
-      body: Container(
+      body: SizedBox(
         width: double.maxFinite,
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            // Combined Lists Guide
-            Container(
-              constraints: const BoxConstraints(maxWidth: 600),
-              color: Colors.grey.shade900,
-              padding: const EdgeInsets.all(16.0),
-              child: Table(
-                border: TableBorder.all(color: Colors.grey.shade800),
-                columnWidths: const {
-                  0: FlexColumnWidth(4),
-                  1: FlexColumnWidth(1),
-                },
-                children: [
-                  // Table Head Row
-                  const TableRow(decoration: BoxDecoration(), children: [
-                    TableHeadCell(text: 'Title'),
-                    TableHeadCell(text: 'ListCode'),
-                  ]),
-                  // Build UI From the list of Combined lists
-                  for (Map list in listOfDiffLists)
-                    TableRow(children: [
-                      TextTableCell(text: list['title']),
-                      Row(children: [ListCodeWidget(title: list['code'])]),
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              // Combined Lists Guide
+              Container(
+                constraints: const BoxConstraints(maxWidth: 600),
+                color: Colors.grey.shade900,
+                padding: const EdgeInsets.all(16.0),
+                child: Table(
+                  border: TableBorder.all(color: Colors.grey.shade800),
+                  columnWidths: const {
+                    0: FlexColumnWidth(4),
+                    1: FlexColumnWidth(1),
+                  },
+                  children: [
+                    // Table Head Row
+                    const TableRow(decoration: BoxDecoration(), children: [
+                      TableHeadCell(text: 'Title'),
+                      TableHeadCell(text: 'ListCode'),
                     ]),
-                ],
+                    // Build UI From the list of Combined lists
+                    for (Map list in listOfDiffLists)
+                      TableRow(children: [
+                        TextTableCell(text: list['title']),
+                        Row(children: [ListCodeWidget(title: list['code'])]),
+                      ]),
+                  ],
+                ),
               ),
-            ),
-            Divider(
-              color: Colors.grey.shade800,
-            ),
-            Container(
-              constraints: const BoxConstraints(maxWidth: 1100),
-              // color: Colors.white,
-              // padding: EdgeInsets.all(20.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Padding(
-                    padding: EdgeInsets.symmetric(vertical: 16.0),
-                    child: Text(
-                      "Array & String",
-                      style: TextStyle(color: Colors.grey, fontSize: 24),
-                    ),
-                  ),
-                  Table(
-                    border: TableBorder.all(color: Colors.grey.shade800),
-                    columnWidths: const {
-                      0: FlexColumnWidth(0.5),
-                      1: FlexColumnWidth(0.7),
-                      2: FlexColumnWidth(4),
-                      3: FlexColumnWidth(1.5),
-                      4: FlexColumnWidth(1.5),
-                      5: FlexColumnWidth(3),
-                    },
-                    children: [
-                      // Table Head Row
-                      const TableRow(
-                        decoration: BoxDecoration(),
+              Divider(
+                color: Colors.grey.shade800,
+              ),
+              Container(
+                constraints: const BoxConstraints(maxWidth: 1100),
+                child: ListView.builder(
+                  physics: const NeverScrollableScrollPhysics(),
+                  shrinkWrap: true,
+                  itemCount: listOfProblemsTopicWise.length,
+                  itemBuilder: (context, index) {
+                    return Container(
+                      constraints: const BoxConstraints(maxWidth: 1100),
+                      // color: Colors.white,
+                      // padding: EdgeInsets.all(20.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          TableHeadCell(text: 'No'),
-                          TableHeadCell(text: 'Done'),
-                          TableHeadCell(text: 'Title'),
-                          TableHeadCell(text: 'Url'),
-                          TableHeadCell(text: 'Solutions'),
-                          TableHeadCell(text: 'From Lists'),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 16.0),
+                            child: Text(
+                              listOfProblemsTopicWise[index]['topicTitle'],
+                              style: const TextStyle(color: Colors.grey, fontSize: 24),
+                            ),
+                          ),
+                          Table(
+                            border: TableBorder.all(color: Colors.grey.shade800),
+                            columnWidths: const {
+                              0: FlexColumnWidth(0.5),
+                              1: FlexColumnWidth(0.7),
+                              2: FlexColumnWidth(4),
+                              3: FlexColumnWidth(1.5),
+                              4: FlexColumnWidth(1.5),
+                              5: FlexColumnWidth(3),
+                            },
+                            children: [
+                              // Table Head Row
+                              const TableRow(
+                                decoration: BoxDecoration(),
+                                children: [
+                                  TableHeadCell(text: 'No'),
+                                  TableHeadCell(text: 'Done'),
+                                  TableHeadCell(text: 'Title'),
+                                  TableHeadCell(text: 'Url'),
+                                  TableHeadCell(text: 'Solutions'),
+                                  TableHeadCell(text: 'From Lists'),
+                                ],
+                              ),
+                              // Table Data Row 1 - length of problems
+                              for (var problem in listOfProblemsTopicWise[index]['problems'] as List)
+                                TableRow(children: [
+                                  const TextTableCell(text: '1'),
+                                  WidgetTableCell(widget: Checkbox(value: true, onChanged: (bool? newVal) {})),
+                                  TextTableCell(text: problem),
+                                  const TextTableCell(text: 'Leetcode'),
+                                  const TextTableCell(text: 'Solution'),
+                                  const Wrap(
+                                    children: [
+                                      ListCodeWidget(title: 'LC75'),
+                                      ListCodeWidget(title: 'LC150'),
+                                      ListCodeWidget(title: 'NC75&150'),
+                                      ListCodeWidget(title: 'LC75'),
+                                      ListCodeWidget(title: 'LC75'),
+                                      ListCodeWidget(title: 'LC75'),
+                                      ListCodeWidget(title: 'LC75'),
+                                    ],
+                                  )
+                                ])
+                            ],
+                          ),
                         ],
                       ),
-                      // Table Data Row 1
-                      TableRow(children: [
-                        const TextTableCell(text: '1'),
-                        WidgetTableCell(
-                          widget: Checkbox(value: true, onChanged: (bool? newVal) {}),
-                        ),
-                        const TextTableCell(text: 'Two Sum'),
-                        const TextTableCell(text: 'Leetcode'),
-                        const TextTableCell(text: 'Solution'),
-                        const Wrap(
-                          children: [
-                            ListCodeWidget(title: 'LC75'),
-                            ListCodeWidget(title: 'LC150'),
-                            ListCodeWidget(title: 'NC75&150'),
-                            ListCodeWidget(title: 'LC75'),
-                            ListCodeWidget(title: 'LC75'),
-                            ListCodeWidget(title: 'LC75'),
-                            ListCodeWidget(title: 'LC75'),
-                          ],
-                        )
-                      ])
-                    ],
-                  ),
-                ],
+                    );
+                  },
+                ),
               ),
-            )
-          ],
+            ],
+          ),
         ),
       ),
     );
