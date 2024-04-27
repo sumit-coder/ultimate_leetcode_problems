@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+
+import 'widgets/table_cell_widgets.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -49,95 +50,80 @@ class _HomeScreenState extends State<HomeScreen> {
                   // Build UI From the list of Combined lists
                   for (Map list in listOfDiffLists)
                     TableRow(children: [
-                      TableCell(text: list['title']),
+                      TextTableCell(text: list['title']),
                       Row(children: [ListCodeWidget(title: list['code'])]),
                     ]),
                 ],
               ),
             ),
-
+            Divider(
+              color: Colors.grey.shade800,
+            ),
             Container(
               constraints: const BoxConstraints(maxWidth: 1100),
               // color: Colors.white,
               // padding: EdgeInsets.all(20.0),
-              child: Table(
-                border: TableBorder.all(color: Colors.grey.shade800),
-                columnWidths: const {
-                  0: FlexColumnWidth(0.5),
-                  1: FlexColumnWidth(4),
-                  2: FlexColumnWidth(1.5),
-                  3: FlexColumnWidth(1.5),
-                  4: FlexColumnWidth(3),
-                },
-                children: const [
-                  // Table Head Row
-                  TableRow(
-                    decoration: BoxDecoration(),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Padding(
+                    padding: EdgeInsets.symmetric(vertical: 16.0),
+                    child: Text(
+                      "Array & String",
+                      style: TextStyle(color: Colors.grey, fontSize: 24),
+                    ),
+                  ),
+                  Table(
+                    border: TableBorder.all(color: Colors.grey.shade800),
+                    columnWidths: const {
+                      0: FlexColumnWidth(0.5),
+                      1: FlexColumnWidth(0.7),
+                      2: FlexColumnWidth(4),
+                      3: FlexColumnWidth(1.5),
+                      4: FlexColumnWidth(1.5),
+                      5: FlexColumnWidth(3),
+                    },
                     children: [
-                      TableHeadCell(text: 'No'),
-                      TableHeadCell(text: 'Title'),
-                      TableHeadCell(text: 'Url'),
-                      TableHeadCell(text: 'Solutions'),
-                      TableHeadCell(text: 'From Lists'),
+                      // Table Head Row
+                      const TableRow(
+                        decoration: BoxDecoration(),
+                        children: [
+                          TableHeadCell(text: 'No'),
+                          TableHeadCell(text: 'Done'),
+                          TableHeadCell(text: 'Title'),
+                          TableHeadCell(text: 'Url'),
+                          TableHeadCell(text: 'Solutions'),
+                          TableHeadCell(text: 'From Lists'),
+                        ],
+                      ),
+                      // Table Data Row 1
+                      TableRow(children: [
+                        const TextTableCell(text: '1'),
+                        WidgetTableCell(
+                          widget: Checkbox(value: true, onChanged: (bool? newVal) {}),
+                        ),
+                        const TextTableCell(text: 'Two Sum'),
+                        const TextTableCell(text: 'Leetcode'),
+                        const TextTableCell(text: 'Solution'),
+                        const Wrap(
+                          children: [
+                            ListCodeWidget(title: 'LC75'),
+                            ListCodeWidget(title: 'LC150'),
+                            ListCodeWidget(title: 'NC75&150'),
+                            ListCodeWidget(title: 'LC75'),
+                            ListCodeWidget(title: 'LC75'),
+                            ListCodeWidget(title: 'LC75'),
+                            ListCodeWidget(title: 'LC75'),
+                          ],
+                        )
+                      ])
                     ],
                   ),
-                  TableRow(children: [
-                    TableCell(text: '1'),
-                    TableCell(text: 'Two Sum'),
-                    TableCell(text: 'Leetcode'),
-                    TableCell(text: 'Solution'),
-                    // TableCell(text: 'TOP150asdfa sdfas dfasd fasdf asdf asdf asd fasdf'),
-                    Wrap(
-                      children: [
-                        ListCodeWidget(title: 'LC75'),
-                        ListCodeWidget(title: 'LC150'),
-                        ListCodeWidget(title: 'NC75&150'),
-                        ListCodeWidget(title: 'LC75'),
-                        ListCodeWidget(title: 'LC75'),
-                        ListCodeWidget(title: 'LC75'),
-                        ListCodeWidget(title: 'LC75'),
-                      ],
-                    )
-                  ])
                 ],
               ),
             )
           ],
         ),
-      ),
-    );
-  }
-}
-
-class TableCell extends StatelessWidget {
-  const TableCell({super.key, required this.text});
-
-  final String text;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(8),
-      child: Text(
-        text,
-        style: TextStyle(color: Colors.grey.shade50),
-      ),
-    );
-  }
-}
-
-class TableHeadCell extends StatelessWidget {
-  const TableHeadCell({super.key, required this.text});
-
-  final String text;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(8),
-      child: Text(
-        text,
-        style: TextStyle(color: Colors.grey.shade50, fontWeight: FontWeight.bold),
       ),
     );
   }
