@@ -75,7 +75,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   children: [
                     // Table Head Row
                     const TableRow(decoration: BoxDecoration(), children: [
-                      TableHeadCell(text: 'Title'),
+                      TableHeadCell(text: 'Combined Lists'),
                       TableHeadCell(text: 'ListCode'),
                     ]),
                     // Build UI From the list of Combined lists
